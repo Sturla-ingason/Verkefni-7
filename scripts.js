@@ -126,6 +126,7 @@ const cart = {
  */
 function formatPrice(price) {
   /* Útfæra */
+  return price.toString();
 }
 
 /**
@@ -136,7 +137,13 @@ function formatPrice(price) {
  * @returns `true` ef `num` er heiltala á bilinu `[min, max]`, annars `false`.
  */
 function validateInteger(num, min = 0, max = Infinity) {
-  /* Útfæra */
+  if (num > min && num < max){
+    return true;
+   }
+   
+   else{
+    return false;
+   }
 }
 
 /**
@@ -279,9 +286,35 @@ function showProducts() {
  */
 function addProductToCart() {
   /* Útfæra */
+  const productIdAssString = prompt('Auðkenni vöru sem á að bæta við körfu: ')
 
   /* Hér ætti að nota `validateInteger` hjálparfall til að staðfesta gögn frá notanda */
+  if (!productIdAssString) {
+    console.error('Verður að vera tala')
+    return;
+  }
   
+
+  const productId = Number.parseInt(productIdAssString);
+  console.log(productId)
+
+  const product = products.find((i) => i.id === productId);
+
+  if (!product){
+    console.error('Vara fannst ekki');
+    return;
+  }
+
+  let productInCart = cart.lines.find((i) => i.product.id === productId)
+
+  if (productInCart){
+    productInCart.quantity += 1;
+  }
+
+  else{
+    const newLine = {product, quantity: 1}
+    cart.lines.push(newLine)
+  }
   /* Til að athuga hvort vara sé til í `cart` þarf að nota `cart.lines.find` */
 }
 

@@ -80,9 +80,13 @@ function formatPrice(price) {
  * @returns `true` ef `num` er heiltala á bilinu `[min, max]`, annars `false`.
  */
 function validateInteger(num, min = 0, max = Infinity) {
-  /* Útfæra */
-
-  return true;
+   if (num > min && num < max){
+    return true;
+   }
+   
+   else{
+    return false;
+   }
 }
 
 /**
